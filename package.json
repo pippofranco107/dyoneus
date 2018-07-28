@@ -1,0 +1,15 @@
+{
+  "name": "dyoneus",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pippofranco107/dyoneus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pippofranco107/dyoneus/issues"
+  },
+  "dependencies": {
+    "mysql": "~2.16.0"
+  }
+}
