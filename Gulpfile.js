@@ -1,5 +1,8 @@
 const gulp = require('gulp');
 const babel = require('gulp-babel');
+const concat = require('gulp-concat');
+const wrap = require('gulp-wrap');
+const uglify = require('gulp-uglify');
 const del = require('del');
 
 gulp.task('default', ['server', 'static']);
@@ -8,9 +11,7 @@ gulp.task('server', function () {
   return gulp.src(['src/server.js']).pipe(gulp.dest('bin'));
 });
 
-gulp.task('static', ['index', 'lib', 'jsx']);
-
-gulp.task('index', function () {
+gulp.task('static', ['lib', 'jsx'], function () {
   return gulp.src(['src/static/index.html']).pipe(gulp.dest('bin/static'));
 });
 
@@ -19,11 +20,16 @@ gulp.task('lib', function () {
 });
 
 gulp.task('jsx', function () {
-  return gulp.src(['src/static/jsx/*.js'])
+  return gulp.src([
+      'src/static/jsx/Main.js',
+  ])
       .pipe(babel({
         presets: ['react'],
       }))
-      .pipe(gulp.dest('bin/static/js'));
+      .pipe(concat('app.min.js'))
+      .pipe(wrap(';(function(){<%= contents %>}());'))
+      .pipe(uglify())
+      .pipe(gulp.dest('bin/static'));
 });
 
 gulp.task('clean', function () {
