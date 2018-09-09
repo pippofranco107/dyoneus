@@ -20,11 +20,9 @@ gulp.task('lib', function () {
 });
 
 gulp.task('jsx', function () {
-  return gulp.src([
-      'src/static/jsx/Main.js',
-  ])
+  return gulp.src(['src/static/jsx/*.js'])
       .pipe(babel({
-        presets: ['react'],
+        presets: ['react', 'env'],
       }))
       .pipe(concat('app.min.js'))
       .pipe(wrap(';(function(){<%= contents %>}());'))

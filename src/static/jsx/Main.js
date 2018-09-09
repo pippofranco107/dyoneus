@@ -1,6 +1,10 @@
+const { Button } = window['material-ui'];
+
 function Dyoneus() {
   return (
-      <div>Es klappt!</div>
+      <div>
+        <Button variant="contained" color="primary">Es klappt!</Button>
+      </div>
   );
 }
 
